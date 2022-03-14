@@ -1,0 +1,31 @@
+<div class="container">
+    <ngb-carousel *ngIf="images">
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="images[0]" alt="Random first slide">
+          </div>
+          <div class="carousel-caption">
+            <h3>Looking for a perfect job</h3>
+            <p>Get the results accurately and apply for the relavat job</p>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="images[1]" alt="Random second slide">
+          </div>
+          <div class="carousel-caption">
+            <h3>We are the reason</h3>
+            <p>We reduce the unemployment in our country and we increased the employment rate</p>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="images[2]" alt="Random third slide">
+          </div>
+          <div class="carousel-caption">
+            <h3>Hurry up!!!!!</h3>
+            <p>Join our team if you still did not register. Sign up and starting looking for the best job fits you!</p>
+          </div>
+        </ng-template>
+      </ngb-carousel>
+</div>

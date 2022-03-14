@@ -1,0 +1,15 @@
+#exampleInputEmail1 {
+    width: 300px;
+}
+
+#exampleInputPassword1{
+    width: 300px;
+}
+
+.successMessage{
+    color: green;
+}
+
+.errorMessage{
+    color: crimson;
+}

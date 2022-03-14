@@ -1,0 +1,59 @@
+<div class="container">
+  <h3>Click here to add a new user</h3>
+
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)= "showModal()">
+    Add User
+  </button>
+  
+  <!-- Modal -->
+  <div [ngClass] = "{show: modal}" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add user to the portal</h5>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+              <label for="username" class="col-form-label">UserName:</label>
+              <input type="text" #username class="form-control" id="username">
+            </div>
+            <div class="form-group">
+              <label for="password" class="col-form-label">Password:</label>
+              <input type="text" #password class="form-control" id="password">
+            </div>
+            <div class="form-group">
+              <label for="qualification" class="col-form-label">Qualification:</label>
+              <input type="number" #qualification class="form-control" id="qualification">
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="isAdmin" (change)="isAdminClick()" checked>
+              <label class="form-check-label" for="isAdmin">
+                is Admin
+              </label>
+            </div>
+            <p id="errorMessage" [hidden]="hideError">{{errorMessage}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Close</button>
+          <button type="button" class="btn btn-primary" (click)="submitUserDetails(username.value, password.value, qualification.value)">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">User Name</th>
+        <th scope="col">Password</th>
+        <th scope="col">Qualification</th>
+        <th scope="col">Is Admin</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor= "let user of users" app-user-detail [user]= "user" (deletedUser)= "deletedUser($event)">
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,7 @@
+.show.modal{
+    display: block;
+}
+
+#errorMessage{
+    color: red;
+}

@@ -1,0 +1,16 @@
+<div class="container">
+    <app-job-form (addedJobFromChild)= "addJobToTheList($event)"></app-job-form>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Job Title</th>
+            <th scope="col">Job Description</th>
+            <th scope="col">Job Eligibility</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let job of jobs" app-job [job] = "job"></tr>
+        </tbody>
+      </table>
+
+</div>

@@ -1,0 +1,13 @@
+html {
+    background-image: url("https://static1.shine.com/l/m/images/blog/online_job_seach_portal_features.jpg");
+    width: 100%; 
+    height: 100%;
+}
+
+.successMessage{
+    color: green;
+}
+
+.errorMessage{
+    color: crimson;
+}
