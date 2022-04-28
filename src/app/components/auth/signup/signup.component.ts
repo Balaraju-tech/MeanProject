@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthserviceService } from 'src/app/authservice.service';
 import { UsersService } from '../../users/users.service';
 import { preventDefault } from 'src/app/commonFunctions/common';
+import { AuthserviceService } from 'src/app/otherServices/authservice.service';
 
 @Component({
   selector: 'app-signup',
@@ -25,14 +25,22 @@ export class SignupComponent implements OnInit {
     else if(qualification === ""){
       this.errorMessage = "Please enter qualification";
     }else{
-      const userDetail = {userName: userName, password: password, qualification: parseInt(qualification), admin: false};
-      this.authService.signUp(userDetail).subscribe((data)=>{
-          if(data.acknowledged === true){
+      const userDetail = {userName: userName, password: password, qualification: qualification, admin: false};
+      this.authService.signUp(userDetail).subscribe({
+        next: (res)=>{
             this.errorMessage = "";
             this.successSignUpHidden = false;
-          }else if(data.acknowledged === false && data.insertedId === "userAlreadyPresent"){
-            this.errorMessage = "Username is already taken, Please try some other username";
-          }
+      },
+      error: (err)=>{
+        console.log("THE ERROR MESSAGE IS");
+        console.log(err);
+        if(err.status === 401){
+          this.successSignUpHidden = true;
+          this.errorMessage = "Username is already taken, Please try some other username";
+        }else{
+          window.alert(`THERE IS AN ERROR : ${err.statusText}`);
+        }
+      }
       });
     }
   }

@@ -1,0 +1,21 @@
+<form [formGroup]="jobForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="jobTitle">Job Title</label>
+      <input type="text" #jobTitle class="form-control" id="jobTitle" aria-describedby="jobHelp" placeholder="Enter JobTitle" formControlName="jobTitle">
+    </div>
+    <div class="form-group">
+      <label for="jobDescription">Job Description</label>
+      <input type="text" #jobDesc class="form-control" id="jobDescription" placeholder="Enter Job Description" formControlName="jobDescription">
+    </div>
+    <div class="form-group">
+      <label for="eligibility">Eligibility in years</label>
+      <input type="number" #eligibility class="form-control" id="eligibility" placeholder="eligibility" formControlName="eligibility">
+    </div>
+    <div class="form-group">
+      <label for="jobRole">JobRole</label>
+      <input type="text" #jobRole class="form-control" id="jobRole" placeholder="jobRole" formControlName="jobRole">
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!jobForm.valid">Add this job to the list</button>
+    <!-- <button class="btn btn-success" (click)= "addJob($event, jobTitle.value, jobDesc.value, eligibility.value, jobRole.value)">Add this job to the list</button> -->
+  </form>
+  <!-- addJob($event, jobTitle, jobDesc, eligibility) -->

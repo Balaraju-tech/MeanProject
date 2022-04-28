@@ -1,6 +1,6 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" routerLink = "home">GetJobOnline</a>
+    <a class="navbar-brand" [routerLink] = "['/home']">GetJobOnline</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,17 +10,26 @@
         <li class="nav-item active">
           <a class="nav-link" routerLink="/home">Home</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!loggedIn" >
           <a class="nav-link" routerLink="/auth/login">Login</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!loggedIn">
           <a class="nav-link" routerLink="/auth/signup">SignUp</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/jobs">Jobs</a>
+        <li class="nav-item" *ngIf="isAdmin">
+          <a class="nav-link" routerLink="/managejobs">ManageJobs</a>
         </li>
-        <li>
+        <li class="nav-item" *ngIf="isAdmin">
           <a class="nav-link" routerLink="/users">Users</a>
+        </li>
+        <li class="nav-item dropdown" *ngIf="loggedIn">
+          <a class="nav-link dropdown-toggle" (click)="toggleJobOptions()" id="navbarDropdown" role="button">
+            Jobs
+          </a>
+          <div *ngIf="showJobOptions">
+            <a class="dropdown-item" [routerLink]="['/applyJob']" [queryParams]="{ appliedJobs : false }">Apply for job</a>
+            <a class="dropdown-item" [routerLink]="['/applyJob']" [queryParams]="{ appliedJobs : true }">JobsApplied</a>
+          </div>
         </li>
       </ul>
     </div>
