@@ -1,6 +1,6 @@
 export interface user{
     userName: String,
     password: String,
-    qualification: Number,
+    qualification: String,
     admin: boolean
 }

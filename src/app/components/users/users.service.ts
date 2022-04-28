@@ -14,7 +14,7 @@ export class UsersService {
 
 
   getUsersList(){
-    return this.http.get<user[]>(this.getUsersAPI);
+    return this.http.get<any>(this.getUsersAPI);
   }
 
   addUser(user: user){

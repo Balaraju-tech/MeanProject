@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthserviceService } from 'src/app/authservice.service';
 import { UsersService } from '../../users/users.service';
 import { SignupComponent } from '../signup/signup.component';
 import { catchError, pipe, tap } from 'rxjs';
 import { preventDefault } from 'src/app/commonFunctions/common';
+import { AuthorizationService } from 'src/app/otherServices/authorization.service';
+import { AuthserviceService } from 'src/app/otherServices/authservice.service';
 
 @Component({
   selector: 'app-login',
@@ -13,28 +14,28 @@ import { preventDefault } from 'src/app/commonFunctions/common';
 })
 export class LoginComponent implements OnInit {
   constructor(
-    private userService: UsersService,
     private router: Router,
-    private authService: AuthserviceService
+    private authService: AuthserviceService,
+    private authorizationService : AuthorizationService
   ) {}
   errorMessage: string = '';
   ngOnInit(): void {}
 
-  login(event: any, username: string, password: string) {
+  async login(event: any, username: string, password: string) {
     preventDefault(event);
-    this.authService
-      .login(username, password)
-      .pipe(catchError(this.authService.unAuthorizedError),
-      tap((res)=>{
-        console.log("This is in the tap")
-        console.log(res);
-      })).subscribe( res=>{
-          if(res.status === 401){
-            this.errorMessage="Please enter valid username or password";
-          }else{
-            this.errorMessage = "";
-            this.router.navigate(['/home']);
-          }
-      });
+    let isAdmin = false;
+    let data = await this.authService.login(username, password);
+      if(data === 401){
+        this.errorMessage = "Please enter valid email address or password"
+      }else{
+        console.log("Entered Pass Else Condition");
+        this.authService.setLocalStorageToken(data.token);
+        if(data.isAdmin){
+          this.authorizationService.setUserAsAdmin();
+        }else{
+          this.authorizationService.setUserAsBasic();
+        }
+        this.router.navigate(['/home']);
+      }
   }
 }
