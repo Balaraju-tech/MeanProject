@@ -1,7 +1,8 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthorizationService } from 'src/app/otherServices/authorization.service';
-import { AuthserviceService } from 'src/app/otherServices/authservice.service';
+import { BehaviorSubject } from 'rxjs';
+import { AuthorizationService } from 'src/app/services/authorization.service';
+import { AuthserviceService } from 'src/app/services/authservice.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,13 +12,17 @@ import { AuthserviceService } from 'src/app/otherServices/authservice.service';
 export class NavbarComponent implements OnInit {
 
   constructor(private router: Router, private authorizationService: AuthorizationService, private authService: AuthserviceService) { }
-  isAdmin: boolean = false;
-  loggedIn: boolean = false;
+  isAdmin = new BehaviorSubject<Boolean>(false);
+  loggedIn = new BehaviorSubject<Boolean>(false);
   showJobOptions: boolean = false;
   ngOnInit(): void {
-    this.isAdmin = this.authorizationService.getAdminType();
-    if(this.authService.getLocalStorageToken() !== null){
-      this.loggedIn = true;
+    if(this.authService.getLocalStorageToken() !== ''){
+      const userDetailsToken = this.authService.getLocalStorageToken()?.split('.')[1];
+      const userDetails = JSON.parse(atob(userDetailsToken));
+      if(userDetails.id){
+        this.loggedIn.next(true);
+        this.isAdmin.next(userDetails.admin);
+      }
     }
   }
 

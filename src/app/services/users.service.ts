@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { user } from 'src/app/interfaces/user';
 
 @Injectable({
@@ -13,7 +14,7 @@ export class UsersService {
   deleteUserAPI = "http://localhost:8000/users/deleteUser";
 
 
-  getUsersList(){
+  getUsersList(): Observable<user[]>{
     return this.http.get<any>(this.getUsersAPI);
   }
 
@@ -22,7 +23,7 @@ export class UsersService {
     return this.http.post<any>(this.addUserAPI, {userDetails: userDetails});
   }
 
-  deleteUser(userName: string){
+  deleteUser(userName: String){
       return this.http.post<any>(this.deleteUserAPI, {userName: userName});
   }
 }

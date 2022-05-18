@@ -70,8 +70,7 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-          },
+          "options": {},
           "configurations": {
             "production": {
               "browserTarget": "jobSearchEngine:build:production"
@@ -104,9 +103,21 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "jobSearchEngine"
+  "defaultProject": "jobSearchEngine",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

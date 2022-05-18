@@ -52,7 +52,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor= "let user of users" app-user-detail [user]= "user" (deletedUser)= "deletedUser($event)">
+      <tr *ngFor= "let user of users|async" app-user-detail [user]= "user" (deletedUser)= "deletedUser($event)">
       </tr>
     </tbody>
   </table>

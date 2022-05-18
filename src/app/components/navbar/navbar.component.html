@@ -10,19 +10,19 @@
         <li class="nav-item active">
           <a class="nav-link" routerLink="/home">Home</a>
         </li>
-        <li class="nav-item" *ngIf="!loggedIn" >
+        <li class="nav-item" *ngIf="(loggedIn | async) === false as loggedIn" >
           <a class="nav-link" routerLink="/auth/login">Login</a>
         </li>
-        <li class="nav-item" *ngIf="!loggedIn">
+        <li class="nav-item" *ngIf="(loggedIn | async) === false as loggedIn">
           <a class="nav-link" routerLink="/auth/signup">SignUp</a>
         </li>
-        <li class="nav-item" *ngIf="isAdmin">
+        <li class="nav-item" *ngIf="(isAdmin| async) as admin">
           <a class="nav-link" routerLink="/managejobs">ManageJobs</a>
         </li>
-        <li class="nav-item" *ngIf="isAdmin">
+        <li class="nav-item" *ngIf="(isAdmin| async) as admin">
           <a class="nav-link" routerLink="/users">Users</a>
         </li>
-        <li class="nav-item dropdown" *ngIf="loggedIn">
+        <li class="nav-item dropdown" *ngIf="(loggedIn | async) as loggedIn">
           <a class="nav-link dropdown-toggle" (click)="toggleJobOptions()" id="navbarDropdown" role="button">
             Jobs
           </a>
