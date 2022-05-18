@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="container">
-    <app-job-form (addedJobFromChild)= "addJobToTheList($event)"></app-job-form>
+    <app-job-form (addJobFromChild)= "addJobToTheList($event)"></app-job-form>
     <table class="table">
         <thead>
           <tr>
@@ -11,7 +11,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let job of jobs" app-job [job] = "job"></tr>
+          <tr *ngFor="let job of (jobs |async)" app-job [job] = "job"></tr>
         </tbody>
       </table>
 </div>

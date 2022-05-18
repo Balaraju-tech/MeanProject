@@ -19,9 +19,10 @@ export class AppliedJobsPipe implements PipeTransform {
                       }
                     }
                     return applied;
-              })
+      });
     }
     return jobs;
+    
   }
 
 }

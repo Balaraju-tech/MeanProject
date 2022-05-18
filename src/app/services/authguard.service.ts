@@ -13,7 +13,7 @@ export class AuthguardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
 
     const token = this.authService.getLocalStorageToken();
-    if(token !== 'undefined' && token){
+    if(token !== undefined && token){
         return true;
     }
     else{

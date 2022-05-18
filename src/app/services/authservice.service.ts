@@ -20,7 +20,10 @@ export class AuthserviceService {
   }
 
   getLocalStorageToken() {
-    const token = localStorage.getItem('token');
+    let token = localStorage.getItem('token');
+    if(!token){
+      token='';
+    }
     return token;
   }
 

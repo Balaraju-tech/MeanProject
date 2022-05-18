@@ -1,21 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UsersService } from '../../users/users.service';
+import { UsersService } from '../../../services/users.service';
 import { preventDefault } from 'src/app/commonFunctions/common';
-import { AuthserviceService } from 'src/app/otherServices/authservice.service';
+import { AuthserviceService } from 'src/app/services/authservice.service';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
 
   constructor(private userService: UsersService, private router: Router, private authService: AuthserviceService) { }
   successSignUpHidden :boolean = true;
   errorMessage: string = "";
-  ngOnInit(): void {
-  }
 
   signUpUser(event:any, userName: string, password: string, qualification: string){
     preventDefault(event);
